@@ -7,7 +7,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useHistory } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 
-export const Header = () => {
+export const Header = ({ user }) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -21,6 +21,7 @@ export const Header = () => {
         history.push(router)
         handleToggleChange()
     }
+    console.log(user)
 
     return (
         <>
@@ -39,7 +40,12 @@ export const Header = () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}  >
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {
+                        user.logged ?
+                            <Typography variant="h6">{user.email}</Typography>
+                            :
+                            <Button color="inherit">Login</Button>
+                    }
                 </Toolbar>
             </AppBar>
             <Drawer open={menuOpen} onClose={() => handleToggleChange()}>
@@ -54,6 +60,10 @@ export const Header = () => {
                 <ListItem button onClick={() => handleMenuClick("/customer/add")}>
                     <ListItemIcon><PersonIcon /></ListItemIcon>
                     <ListItemText>Cadastro de clientes</ListItemText>
+                </ListItem>
+                <ListItem button onClick={() => handleMenuClick("/customer/edit")}>
+                    <ListItemIcon><PersonIcon /></ListItemIcon>
+                    <ListItemText>Alterar informações de clientes</ListItemText>
                 </ListItem>
             </Drawer>
         </>

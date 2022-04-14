@@ -6,8 +6,11 @@ import Grid from '@mui/material/Grid';
 
 import { CardCustomer } from "../components/CardCustomer"
 
+import { useParams, useHistory } from "react-router-dom"
+
 
 export const CustomerList = () => {
+
 
     const [users, setUsers] = useState([])
 
@@ -27,8 +30,13 @@ export const CustomerList = () => {
 
 
     }
+    const { id } = useParams()
 
+    const history = useHistory()
 
+    const handleEditCadastro = id => {
+        history.push(`/customer/edit/${id}`)
+    }
 
     return (
         <Grid container spacing={6}>
@@ -37,7 +45,7 @@ export const CustomerList = () => {
                     return (
                         <Grid item xs={12} sm={6} md={6} >
                             <Paper>
-                                <CardCustomer key={index} nome={item.first_name} sobrenome={item.last_name} email={item.email} avatar={item.avatar} handleRemoverCustomer={handleRemoverCustomer} id={item.id} />
+                                <CardCustomer key={index} nome={item.first_name} sobrenome={item.last_name} email={item.email} avatar={item.avatar} handleRemoverCustomer={handleRemoverCustomer} id={item.id} onEditCustomer={handleEditCadastro} />
                             </Paper>
                         </Grid>
                     )

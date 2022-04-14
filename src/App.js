@@ -4,12 +4,20 @@ import { Default } from "../src/templates/Default";
 import { Page } from "../src/templates/Page";
 import { CustomerList } from "./pages/List";
 import { CustomerRegister } from "./pages/Register";
-
+import { CustomerRegisterEdit } from "./components/CustomersEdit";
+import { Login } from "./pages/Login";
+import { Clean } from "./templates/Clean";
 function App() {
   return (
     <Router>
-      <Default>
-        <Switch>
+      <Switch>
+        <Route path="/login">
+          <Clean title="Acesso restrito" Component={Login} />
+        </Route>
+        <Default>
+          <Route exact path="/customer/edit/:id">
+            <Page title="Clientes" Component={CustomerRegisterEdit} />
+          </Route>
           <Route exact path="/customer/add">
             <Page title="Clientes" Component={CustomerRegister} />
           </Route>
@@ -19,8 +27,8 @@ function App() {
           <Route exact path="/customer">
             <Page title="Clientes" Component={CustomerList} />
           </Route>
-        </Switch>
-      </Default>
+        </Default>
+      </Switch>
     </Router>
   );
 }

@@ -3,8 +3,7 @@ import { red, yellow } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
-import { Header } from '../partials/Header/Header'
-import { useAuth } from '../state/auth';
+
 
 
 
@@ -20,15 +19,13 @@ const theme = createTheme({
 });
 
 
-export const Default = ({ children }) => {
-    const [user] = useAuth()
+export const Clean = ({ Component }) => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Header user={user} />
             </ThemeProvider>
             <Container maxWidth="sm" sx={{ padding: "15px 0px" }} >
-                {children}
+                <Component />
             </Container>
         </>
     )
